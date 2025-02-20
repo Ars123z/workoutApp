@@ -43,6 +43,7 @@ import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshots.SnapshotStateList
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -58,6 +59,11 @@ import androidx.compose.ui.zIndex
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.greatworkouts.data.Tool
+import com.example.greatworkouts.ui.components.DurationDialog
+import com.example.greatworkouts.ui.components.FitnessToolsBottomSheet
+import com.example.greatworkouts.ui.components.IconWithText
+import com.example.greatworkouts.ui.components.OptionCard
+import com.example.greatworkouts.ui.components.ToggleOptionCard
 
 @Composable
 fun Workouts(
@@ -75,9 +81,11 @@ fun Workouts(
     var isQuietWorkoutChecked by remember { mutableStateOf(false) }
     var duration by remember { mutableIntStateOf(30) }
     var calories by remember { mutableIntStateOf(180) }
-    val fitnessTool = remember { mutableStateListOf<Tool>() }
+    var fitnessTool = remember { mutableStateListOf<String>() }
     val context = LocalContext.current
     val imageBitmap = workout.value?.let { getImageBitmapFromAssets(context, it.coverImage) }
+    var showDurationDialog by remember { mutableStateOf(false) }
+    var showBottomSheet by remember { mutableStateOf(false) }
 
     ConstraintLayout(
         modifier = Modifier
@@ -168,9 +176,31 @@ fun Workouts(
             Column(
                 modifier = Modifier.verticalScroll(rememberScrollState())
             ) {
-                OptionCard("Music and Sound", Icons.Default.MusicNote) {}
-                OptionCard("Duration", Icons.Default.Timer) {}
-                OptionCard("Fitness Tools", Icons.Default.FitnessCenter, fitnessTool.size)
+                OptionCard("Music and Sound", Icons.Default.MusicNote, true) {}
+                OptionCard("Duration", Icons.Default.Timer, false, "$duration minutes") {showDurationDialog = true}
+                if (fitnessTool.size == 1) {
+                    OptionCard(
+                        "Fitness Tools",
+                        Icons.Default.FitnessCenter,
+                        false,
+                        "${fitnessTool[0]}"
+                    ) { showBottomSheet = true }
+                } else if (fitnessTool.size > 1) {
+                    OptionCard(
+                        "Fitness Tools",
+                        Icons.Default.FitnessCenter,
+                        false,
+                        "${fitnessTool.size} items"
+                    )
+                }
+                else {
+                    OptionCard(
+                        "Fitness Tools",
+                        Icons.Default.FitnessCenter,
+                        false,
+                        "None"
+                    ) { showBottomSheet = true }
+                }
                 ToggleOptionCard(
                     "Start with a warmup",
                     "3 minutes",
@@ -240,8 +270,23 @@ fun Workouts(
                 }
             }
         }
-
-
+        // Show the DurationDialog conditionally
+        if (showDurationDialog) {
+            DurationDialog(
+                initialDuration = duration,
+                onDismissRequest = { showDurationDialog = false },
+                onDurationSelected = { newDuration ->
+                    duration = newDuration
+                }
+            )
+        }
+        if (showBottomSheet) {
+            FitnessToolsBottomSheet(
+                fitnessTool,
+                onDismiss = { showBottomSheet = false },
+                onDone = {it -> fitnessTool = it as SnapshotStateList<String> }
+            )
+        }
         Button(
             onClick = {
                 goToExerciseScreen(name)
@@ -258,94 +303,9 @@ fun Workouts(
     }
 }
 
-@Composable
-fun OptionCard(title: String, icon: ImageVector, value: Any? = null, onClick: () -> Unit = {}) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(80.dp)
-            .padding(vertical = 8.dp)
-            .clickable { onClick() },
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.elevatedCardElevation()
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .fillMaxHeight(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
-        ) {
-            Icon(imageVector = icon, contentDescription = null, tint = Color.Gray)
-            Text(
-                text = title,
-                modifier = Modifier.padding(start = 8.dp),
-                style = MaterialTheme.typography.bodyLarge
-            )
-            Spacer(modifier = Modifier.weight(1f))
-            Text(
-                text = value?.toString() ?: "",
-                style = MaterialTheme.typography.bodyMedium
-            )
-            Icon(
-                imageVector = Icons.Default.ChevronRight,
-                contentDescription = null,
-                tint = Color.Gray
-            )
-        }
-    }
-}
-
-@Composable
-fun ToggleOptionCard(
-    title: String,
-    subtitle: String,
-    icon: ImageVector,
-    checked: Boolean,
-    onCheckedChange: (Boolean) -> Unit
-) {
-    Card(
-        modifier = Modifier
-            .fillMaxWidth()
-            .height(80.dp)
-            .padding(vertical = 8.dp)
-            .clickable { onCheckedChange(!checked) },
-        colors = CardDefaults.cardColors(containerColor = Color.White),
-        elevation = CardDefaults.elevatedCardElevation()
-    ) {
-        Row(
-            modifier = Modifier
-                .padding(horizontal = 16.dp)
-                .fillMaxHeight(),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.Start
-        ) {
-            Icon(imageVector = icon, contentDescription = null, tint = Color.Gray)
-            Column(modifier = Modifier.padding(start = 8.dp)) {
-                Text(text = title, style = MaterialTheme.typography.bodyLarge)
-                Text(text = subtitle, style = MaterialTheme.typography.bodySmall)
-            }
-            Spacer(modifier = Modifier.weight(1f))
-            Switch(
-                checked = checked,
-                onCheckedChange = onCheckedChange,
-                colors = SwitchDefaults.colors(
-                    checkedThumbColor = Color.White,
-                    uncheckedThumbColor = Color.White,
-                    checkedTrackColor = Color.Blue,
-                    uncheckedTrackColor = Color.Gray
-                )
-            )
-        }
-    }
-}
 
 
-@Composable
-fun IconWithText(icon: ImageVector, text: String) {
-    Row(verticalAlignment = Alignment.CenterVertically) {
-        Icon(imageVector = icon, contentDescription = null)
-        Text(text = text)
-    }
-}
+
+
+
 
