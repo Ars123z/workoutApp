@@ -1,6 +1,5 @@
 package com.example.greatworkouts.ui.screen
 
-import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
@@ -13,11 +12,8 @@ import com.example.greatworkouts.data.Tool
 import com.example.greatworkouts.repositories.CategoryRepository
 import com.example.greatworkouts.repositories.ExerciseRepository
 import com.example.greatworkouts.repositories.ToolRepository
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.combine
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.forEach
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.onEach
 

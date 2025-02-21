@@ -20,7 +20,15 @@ data class Workout(
     val pro: Boolean,
     val subCategory: String?,
     val description: String,
+    val restFrequency: Int
 )
+
+@Entity(tableName = "workout_tool_cross_ref", primaryKeys = ["workoutName", "toolName"])
+data class WorkoutToolCrossRef(
+    val workoutName: String,
+    val toolName: String
+)
+
 
 @Dao
 interface WorkoutDao {
@@ -31,6 +39,9 @@ interface WorkoutDao {
 
     @Query("SELECT * FROM workouts")
     fun getAllWorkouts(): Flow<List<Workout>>
+
+    @Query("SELECT * FROM tools WHERE name IN (SELECT toolName FROM workout_tool_cross_ref WHERE workoutName = :workoutName)")
+    fun getAllCmptTool(workoutName: String): Flow<List<Tool>>
 
 
 }

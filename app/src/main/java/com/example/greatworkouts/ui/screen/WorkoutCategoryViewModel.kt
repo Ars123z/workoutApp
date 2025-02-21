@@ -6,9 +6,7 @@ import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.AP
 import androidx.lifecycle.viewmodel.initializer
 import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.greatworkouts.GreatWorkoutsApplication
-import com.example.greatworkouts.data.Category
 import com.example.greatworkouts.data.Workout
-import com.example.greatworkouts.repositories.CategoryRepository
 import com.example.greatworkouts.repositories.WorkoutRepository
 import kotlinx.coroutines.flow.Flow
 

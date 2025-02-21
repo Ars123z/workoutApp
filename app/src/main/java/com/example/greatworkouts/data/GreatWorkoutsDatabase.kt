@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 
 @Database(
-    entities = [Exercise::class, Category::class, Tool::class, Workout::class, ExerciseCategoryCrossRef::class, ExerciseWorkoutCrossRef::class],
+    entities = [Exercise::class, Category::class, Tool::class, Workout::class, ExerciseCategoryCrossRef::class, ExerciseWorkoutCrossRef::class, WorkoutToolCrossRef::class],
     version = 1,
     exportSchema = true
 )

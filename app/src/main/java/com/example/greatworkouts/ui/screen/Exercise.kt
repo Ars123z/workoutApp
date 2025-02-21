@@ -38,7 +38,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.example.greatworkouts.FullScreenVideoPlayer
+import com.example.greatworkouts.utils.FullScreenVideoPlayer
 import com.example.greatworkouts.data.Exercise
 import com.example.greatworkouts.utils.getVideoUriFromAssets
 import kotlinx.coroutines.delay
