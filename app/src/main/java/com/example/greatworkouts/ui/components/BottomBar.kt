@@ -28,8 +28,8 @@ fun BottomBar(
     val bottomBarScreens = listOf(
         Screens.Plan,
         Screens.WorkoutScreen,
-        Screens.Profile,
-        Screens.Trackers
+        Screens.Food,
+        Screens.Profile
     )
     val currentScreen = navController.currentBackStackEntryAsState().value?.destination?.route
 

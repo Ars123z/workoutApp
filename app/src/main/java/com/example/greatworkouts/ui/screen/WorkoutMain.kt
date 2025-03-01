@@ -20,11 +20,11 @@ import androidx.compose.ui.unit.dp
 import com.example.greatworkouts.ui.components.CategoryCard
 
 val categoryList = listOf(
-    listOf("Strength", "workout_main/torso_clean.png"),
-    listOf("Flexibility", "workout_main/torso_clean.png"),
-    listOf("Endurance", "workout_main/torso_clean.png"),
-    listOf("Strength", "workout_main/torso_clean.png"),
-    listOf("BreathWork", "workout_main/torso_clean.png")
+    listOf("Strength", "workout_main/strength.png"),
+    listOf("HIIT, Cardio", "workout_main/hiit_cardio.png"),
+    listOf("Yoga, Stretching", "workout_main/yoga_stretching.png"),
+    listOf("Warmup, Recovery", "workout_main/warmup_recovery.png"),
+    listOf("Breathwork", "workout_main/breathwork.png")
 )
 
 @Composable

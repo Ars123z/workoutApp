@@ -15,6 +15,7 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import com.example.greatworkouts.ui.components.BottomBar
 import com.example.greatworkouts.ui.screen.ExerciseList
 import com.example.greatworkouts.ui.screen.ExerciseScreen
+import com.example.greatworkouts.ui.screen.Food
 import com.example.greatworkouts.ui.screen.Instruction
 import com.example.greatworkouts.ui.screen.Plans
 import com.example.greatworkouts.ui.screen.Profile
@@ -34,7 +35,7 @@ enum class Screens(
     ),
     WorkoutScreen(
         route = "workout_main",
-        title = "Workout_main",
+        title = "Workouts",
         icon = R.drawable.dumbell_grey
 
     ),
@@ -59,14 +60,14 @@ enum class Screens(
         title = "Instruction"
     ),
     Profile(
-        "profile",
+        route = "profile",
         title = "Profile",
         icon = R.drawable.profile_grey
     ),
-    Trackers(
-        "trackers",
-        title = "Trackers",
-        icon = R.drawable.dumbell_grey
+    Food(
+        route = "food",
+        title = "Food",
+        icon = R.drawable.restaurant
     );
 
     fun createRoute(vararg args: String): String {
@@ -89,10 +90,10 @@ enum class Screens(
                 ExerciseList.route -> ExerciseList
                 Instructions.route -> Instructions
                 Profile.route -> Profile
-                Trackers.route -> Trackers
+                Food.route -> Food
                 null -> Plan
                 else -> throw IllegalArgumentException("Route $route is not recognized.")
-        }
+            }
     }
 
 
@@ -162,8 +163,8 @@ fun GreatWorkouts(
             ) {
                 WorkoutMain(
                     goToCategory = {
-                    navController.navigate(Screens.WorkoutCategory.route)
-                },
+                        navController.navigate(Screens.WorkoutCategory.route)
+                    },
                     goToMenu = {
                         navController.navigate(Screens.ExerciseList.route)
                     }
@@ -301,7 +302,7 @@ fun GreatWorkouts(
                 )
             }
             composable(
-                route = Screens.Trackers.route,
+                route = Screens.Food.route,
                 enterTransition = {
                     slideInHorizontally(
                         initialOffsetX = { it }, // Slide from right
@@ -315,8 +316,8 @@ fun GreatWorkouts(
                     ) + fadeOut(animationSpec = tween(700))
                 }
             ) {
-                Plans()
-                }
+                Food()
+            }
         }
     }
 }

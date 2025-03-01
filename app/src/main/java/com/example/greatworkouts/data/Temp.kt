@@ -32,6 +32,13 @@ data class Settings(
     val name: String,
 )
 
+data class Food(
+    val name: String,
+    val calories: String,
+    val cookingTime: String,
+    val coverImage: String,
+)
+
 val workoutCategories = listOf(
     WorkoutCategory(
         name = "Gain muscle",
@@ -159,7 +166,7 @@ val settingData = listOf(
     ),
     Settings(
         icon = Icons.Outlined.BarChart,
-        name= "Progress"
+        name= "Report"
     ),
     Settings(
         icon = Icons.Outlined.Cancel,
@@ -192,6 +199,77 @@ val settingData = listOf(
     Settings(
         icon = Icons.Outlined.Sync,
         name= "Sync"
+    ),
+)
+
+val foodData = listOf(
+    Food(
+        name= "Baked Parmesan Zucchini chips with black beans",
+        calories= "696 kcal",
+        cookingTime= "30 min",
+        coverImage= "food/baked_parmesan_zucchini_chips_with_black_beans_salsa.png"
+    ),
+    Food(
+        name= "Broccoli and Ricotta Pizza",
+        calories= "696 kcal",
+        cookingTime= "30 min",
+        coverImage= "food/broccoli_and_ricotta_pizza.png"
+    ),
+    Food(
+        name= "Chicken Peas Broccoli Salad Wraps",
+        calories= "696 kcal",
+        cookingTime= "30 min",
+        coverImage= "food/chicken_pea_broccoli_salad_wraps.png"
+    ),
+    Food(
+        name= "Fajita Roast Chicken",
+        calories= "696 kcal",
+        cookingTime= "30 min",
+        coverImage= "food/fajita_roast_chicken.png"
+    ),
+    Food(
+        name= "Instant Pot Minestrone",
+        calories= "696 kcal",
+        cookingTime= "30 min",
+        coverImage= "food/Instant_pot_minestrone.png"
+    ),
+    Food(
+        name= "Kale and Black Bean Salad With Avocado",
+        calories= "696 kcal",
+        cookingTime= "30 min",
+        coverImage= "food/kale_and_black_bean_salad_with_avocado.png"
+    ),
+    Food(
+        name= "Mango Mandarin Smoothie with Turmeric",
+        calories= "696 kcal",
+        cookingTime= "30 min",
+        coverImage= "food/mango_mandarin_smoothie_with_turmeric.png"
+    ),
+    Food(
+        name= "Quick Skillet Peach Cobbler",
+        calories= "696 kcal",
+        cookingTime= "30 min",
+        coverImage= "food/quick_skillet_peach_cobbler.png"
+    ),
+    Food(
+        name= "Spring Beans Salad with Toasted Fennel Vinaigrette",
+        calories= "696 kcal",
+        cookingTime= "30 min",
+        coverImage= "food/spring_bean_salad_with_toasted_fennel_vinaigrette.png"
+    ),
+    Food(
+        name= "Turkey Bolognese with Zucchini Noddles",
+        calories= "696 kcal",
+        cookingTime= "30 min",
+        coverImage= "food/turkey_bolognese_with_zucchini_noodles.png"
+    ),
+    Food(
+        name= "Turkey Barley Soup",
+        calories= "696 kcal",
+        cookingTime= "30 min",
+        coverImage= "food/turkey_barley_soup.png"
+    ),
 
 )
-)
+
+

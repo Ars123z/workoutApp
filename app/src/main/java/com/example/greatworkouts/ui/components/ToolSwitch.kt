@@ -9,7 +9,6 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -21,14 +20,14 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 
-@Composable
+@androidx.compose.runtime.Composable
 fun ToolSwitch(
     fitnessTool: List<String>,
     toolName: String,
     icon: Int,
     onCheckedChange: (String) -> Unit
 ) {
-    var checked by remember { mutableStateOf(false) }
+    var checked by androidx.compose.runtime.remember { mutableStateOf(false) }
 
     LaunchedEffect(key1 = Unit) {
         checked = fitnessTool.contains(toolName)
@@ -36,16 +35,17 @@ fun ToolSwitch(
 
     Row(
         horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.padding(horizontal= 16.dp)
+        modifier = Modifier.padding(horizontal = 16.dp)
             .fillMaxWidth()
     ) {
         Row(
             verticalAlignment = Alignment.CenterVertically,
         ) {
-            Icon(painter = painterResource(icon),
+            Icon(
+                painter = painterResource(icon),
                 contentDescription = null,
-                tint = Color.Gray,
-                modifier= Modifier.size(80.dp)
+                tint = Color.Companion.Gray,
+                modifier = Modifier.size(80.dp)
             )
             Text(text = toolName)
         }
