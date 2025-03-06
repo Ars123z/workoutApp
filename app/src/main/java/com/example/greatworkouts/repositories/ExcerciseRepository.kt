@@ -13,6 +13,7 @@ interface ExerciseRepository {
     fun getExerciseByCategories(category: List<String>): Flow<List<Exercise>>
     fun getExerciseCategories(exerciseName: String): Flow<List<Category>>
     fun getExerciseByDifficulty(difficulty: List<String>): Flow<List<Exercise>>
+    fun getExerciseByCategory(category: String): Flow<List<Exercise>>
 }
 
 class OfflineExerciseRepository(private val exerciseDao: ExerciseDao) : ExerciseRepository {
@@ -37,6 +38,8 @@ class OfflineExerciseRepository(private val exerciseDao: ExerciseDao) : Exercise
     }
 
     override fun getExerciseCategories(exerciseName: String): Flow<List<Category>> = exerciseDao.getExerciseCategories(exerciseName)
+
+    override fun getExerciseByCategory(category: String): Flow<List<Exercise>> = exerciseDao.getExercisesByCategory(listOf(category))
 
 
 }

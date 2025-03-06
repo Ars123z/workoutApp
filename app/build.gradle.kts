@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.parcelize)
+    alias(libs.plugins.spotless)
 }
 
 android {
@@ -12,8 +13,8 @@ android {
 
     defaultConfig {
         applicationId = "com.example.greatworkouts"
-        minSdk = 24
-        targetSdk = 34
+        minSdk = 27
+        targetSdk = 35
         versionCode = 1
         versionName = "1.0"
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
@@ -42,6 +43,19 @@ android {
     }
     buildFeatures {
         compose = true
+    }
+}
+
+spotless {
+    kotlin {
+        target("**/*.kt")
+        targetExclude(layout.buildDirectory.map { it.asFile.absolutePath + "/**/*.kt" })
+        targetExclude("bin/**/*.kt")
+
+        ktlint("0.41.0")
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
     }
 }
 
@@ -79,5 +93,16 @@ dependencies {
     implementation(libs.androidx.room.runtime) // Use latest version
     ksp(libs.androidx.room.compiler) // For annotation processing (Kotlin)
     implementation(libs.androidx.room.ktx)
-
+    // Add a dependency of Health Connect SDK
+    implementation(libs.androidx.connect.client)
+    // To bridge between ListenableFuture and suspend functions
+    implementation(libs.androidx.concurrent.futures.ktx)
+    coreLibraryDesugaring(libs.desugar.jdk.libs)
+//    Worker
+    implementation(libs.androidx.work.runtime.ktx)
+//    Graphing Library
+    implementation(libs.composable.graphs)
+// Pager
+    implementation(libs.accompanist.pager)
+    implementation(libs.accompanist.pager.indicators)
 }

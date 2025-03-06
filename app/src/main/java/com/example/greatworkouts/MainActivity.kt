@@ -7,7 +7,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.ui.Modifier
-import androidx.navigation.compose.rememberNavController
+import com.example.greatworkouts.data.HealthConnectManager
 import com.example.greatworkouts.ui.theme.GreatWorkoutsTheme
 
 
@@ -17,9 +17,10 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             GreatWorkoutsTheme {
+                val healthConnectManager = HealthConnectManager(this)
                 Scaffold { padding ->
                     GreatWorkouts(
-                        navController = rememberNavController(),
+                        healthConnectManager = healthConnectManager,
                         modifier = Modifier.padding(padding)
                     )
                 }

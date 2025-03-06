@@ -19,7 +19,7 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.example.greatworkouts.Screens
+import com.example.greatworkouts.ui.navigation.Screens
 
 @Composable
 fun BottomBar(
@@ -29,6 +29,7 @@ fun BottomBar(
         Screens.Plan,
         Screens.WorkoutScreen,
         Screens.Food,
+        Screens.Dashboard,
         Screens.Profile
     )
     val currentScreen = navController.currentBackStackEntryAsState().value?.destination?.route
