@@ -29,7 +29,7 @@ import com.example.greatworkouts.utils.getImageBitmapFromAssets
 fun ExerciseCard(
     name: String,
     shape: Shape,
-    thumbnail: String,
+    thumbnail: String?,
     context: Context,
     goToInstructions: (String) -> Unit,
     borderModifier: Modifier
@@ -57,7 +57,7 @@ fun ExerciseCard(
             Image(
                 bitmap= getImageBitmapFromAssets(
                     context = context,
-                    imagePath= thumbnail
+                    imagePath= "thumbnail/jogging.png"
                 )!!,
                 contentScale = ContentScale.Crop,
                 contentDescription = "Exercise Thumbnail",

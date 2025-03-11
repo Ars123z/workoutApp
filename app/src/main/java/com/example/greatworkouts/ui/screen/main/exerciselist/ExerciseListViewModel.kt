@@ -1,6 +1,11 @@
 package com.example.greatworkouts.ui.screen.main.exerciselist
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProvider.AndroidViewModelFactory.Companion.APPLICATION_KEY
+import androidx.lifecycle.viewmodel.initializer
+import androidx.lifecycle.viewmodel.viewModelFactory
+import com.example.greatworkouts.GreatWorkoutsApplication
 import com.example.greatworkouts.data.Exercise
 import com.example.greatworkouts.repositories.ExerciseRepository
 import com.example.greatworkouts.repositories.ToolRepository
@@ -24,4 +29,16 @@ class ExerciseListViewModel(
                 }
             }
         }
+
+    companion object {
+        val factory: ViewModelProvider.Factory = viewModelFactory {
+        initializer {
+            val application = (this[APPLICATION_KEY] as GreatWorkoutsApplication)
+            ExerciseListViewModel(
+                application.container.exerciseRepository,
+                application.container.toolRepository
+            )
+        }
+        }
+    }
 }

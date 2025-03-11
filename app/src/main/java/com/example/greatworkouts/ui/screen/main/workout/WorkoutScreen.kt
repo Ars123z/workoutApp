@@ -223,7 +223,7 @@ fun Workouts(
                                 verticalAlignment = Alignment.CenterVertically
 
                             ) {
-                                val thumbnail = exercise.thumbnail
+                                val thumbnail = "thumbnail/calf_raises.png"
                                 val thumbnailBitmap =
                                     getImageBitmapFromAssets(context, thumbnail)
                                 Log.d("thumbnailBitmap", exercise.thumbnail)

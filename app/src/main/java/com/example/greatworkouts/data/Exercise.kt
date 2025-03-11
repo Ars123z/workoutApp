@@ -35,7 +35,7 @@ data class Exercise(
     val tool: String,
     val standing: Boolean,
     val difficulty: String,
-    val calories: Int,
+    val calories60: Int,
     val thumbnail: String
 )
 

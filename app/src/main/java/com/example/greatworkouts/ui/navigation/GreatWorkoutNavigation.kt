@@ -30,6 +30,7 @@ import com.example.greatworkouts.ui.screen.main.dashboard.Dashboard
 import com.example.greatworkouts.ui.screen.main.exerciselist.ExerciseList
 import com.example.greatworkouts.ui.screen.main.exercise.ExerciseScreen
 import com.example.greatworkouts.ui.screen.main.exerciselist.ExerciseByCategoryScreen
+import com.example.greatworkouts.ui.screen.main.exerciselist.ExerciseByToolScreen
 import com.example.greatworkouts.ui.screen.main.food.Food
 import com.example.greatworkouts.ui.screen.main.instruction.Instruction
 import com.example.greatworkouts.ui.screen.main.home.Plans
@@ -43,8 +44,7 @@ import com.example.greatworkouts.ui.screen.profile.privacycenter.PrivacyCenterSc
 import com.example.greatworkouts.ui.screen.profile.sleep.SleepScreen
 import com.example.greatworkouts.ui.screen.profile.steps.StepsScreen
 
-
-@OptIn(ExperimentalMaterial3Api::class)
+@Suppress("Un")
 @Composable
 fun GreatWorkoutNavigation(
     healthConnectManager: HealthConnectManager,
@@ -194,7 +194,8 @@ fun GreatWorkoutNavigation(
                     name = it.arguments?.getString("name"),
                     onExerciseCompleted = { navController.popBackStack() },
                     goToInstructions = { name -> navController.navigate(Screens.Instructions.route + "/$name") },
-                    goToWorkout = { navController.popBackStack() }
+                    goToWorkout = { navController.popBackStack() },
+                    goToExerciseList = { navController.navigate(Screens.ExerciseList.route) }
                 )
             }
 
@@ -258,8 +259,9 @@ fun GreatWorkoutNavigation(
                 }
             ) {
                 ExerciseByCategoryScreen(
-                    categoryName = it.arguments?.getString("category"),
-                    goBack = { navController.popBackStack() }
+                    categoryName = it.arguments?.getString("category")!!,
+                    goBack = { navController.popBackStack() },
+                    goToInstructions = { name -> navController.navigate(Screens.Instructions.route + "/$name") }
                 )
             }
             composable(
@@ -280,9 +282,10 @@ fun GreatWorkoutNavigation(
                     ) + fadeOut(animationSpec = tween(700))
                 }
             ) {
-                ExerciseByCategoryScreen(
-                    categoryName = it.arguments?.getString("tool"),
-                    goBack = { navController.popBackStack() }
+                ExerciseByToolScreen(
+                    toolName = it.arguments?.getString("tool")!!,
+                    goBack = { navController.popBackStack() },
+                    goToInstructions = { name -> navController.navigate(Screens.Instructions.route + "/$name") }
                 )
             }
             composable(

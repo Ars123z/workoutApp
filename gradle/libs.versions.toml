@@ -1,7 +1,7 @@
 [versions]
 accompanistNavigationAnimation = "0.32.0"
 accompanistPager = "0.31.1-alpha"
-agp = "8.7.3"
+agp = "8.9.0"
 composableGraphs = "1.2.3"
 concurrentFuturesKtx = "1.2.0"
 connectClient = "1.1.0-alpha11"
